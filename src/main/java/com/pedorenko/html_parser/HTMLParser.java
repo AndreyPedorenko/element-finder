@@ -23,7 +23,9 @@ public class HTMLParser {
         try {
             Document doc = parseDocument(htmlFile, charsetName);
 
-            return Optional.ofNullable(doc.getElementById(targetElementId));
+            Element targetElement = doc.getElementById(targetElementId);
+
+            return targetElement == null ? Optional.empty() : Optional.of(doc.getElementById(targetElementId));
 
         } catch (IOException e) {
             System.out.println("Error reading file " + htmlFile.getAbsolutePath() + "\n" + e);

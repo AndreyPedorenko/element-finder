@@ -27,7 +27,7 @@ public class Matcher {
     private static Optional<Element> findMostMatchingElementInDocument(Document doc, MatchingParams matchingParams) {
 
         double maxMatchPercent = -1;
-        Element bestMatch = null;
+        Optional<Element> bestMatch = Optional.empty();
 
         for (Element element : doc.getAllElements()) {
 
@@ -35,12 +35,12 @@ public class Matcher {
 
             if (matchPercent > maxMatchPercent) {
                 maxMatchPercent = matchPercent;
-                bestMatch = element;
+                bestMatch = Optional.of(element);
             }
 
         }
 
-        return Optional.ofNullable(bestMatch);
+        return bestMatch;
     }
 
     public static double defineMatchPercent(Element element, MatchingParams matchingParams) {
